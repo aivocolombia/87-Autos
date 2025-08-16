@@ -17,7 +17,7 @@ export default function HeroSection() {
     {
       type: "hero",
       background:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hero-video-placeholder.jpg-cEUXzuoLp9Bw2II34fko6MbS6TcC28.jpeg", // Using the BMW highway image as background
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2025-05-03-iUIbYaI4LbkqA6ngdjsOtD5ZndAhXc.webp", // Changed to the new 87 Autos dealership facade image
       content: {
         title: "El lugar donde subes de nivel", // Simplified to just the tagline
         subtitle: "",
@@ -249,12 +249,7 @@ export default function HeroSection() {
             {/* Content */}
             {slide.type === "hero" ? (
               <div className="relative z-10 flex h-full flex-col items-center justify-start px-6 pt-20">
-                <div className="text-center mb-8">
-                  <img
-                    src={getCurrentLogo() || "/placeholder.svg"}
-                    alt="87 Autos Logo"
-                    className="h-20 w-auto mx-auto mb-6 transition-all duration-500 ease-in-out"
-                  />
+                <div className="text-center">
                   <h1
                     className="text-xl md:text-2xl lg:text-3xl font-light tracking-widest leading-tight text-white"
                     style={{ fontFamily: "Avenir, system-ui, sans-serif" }}
@@ -277,11 +272,11 @@ export default function HeroSection() {
                     </p>
                   )}
                 </div>
-                <div className="hidden lg:block flex-shrink-0 ml-2 mr-8">
+                <div className="hidden lg:block flex-shrink-0 -ml-4 mr-4">
                   <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/motocicleta-bmw-s-1000-rr-plano-general-lateral__1_-removebg-preview-9YiERalvKJpV5ms1RrOMgc76pnTRYj.png"
                     alt="BMW S 1000 RR Motorcycle"
-                    className="w-80 h-auto object-contain"
+                    className="w-96 h-auto object-contain"
                   />
                 </div>
               </div>
@@ -309,13 +304,11 @@ export default function HeroSection() {
       <nav className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between p-6 md:p-8">
         {/* Logo/Brand */}
         <div className="flex items-center">
-          {currentSlide !== 0 && (
-            <img
-              src={getCurrentLogo() || "/placeholder.svg"}
-              alt="87 Autos Logo"
-              className="h-12 w-auto transition-all duration-500 ease-in-out"
-            />
-          )}
+          <img
+            src={getCurrentLogo() || "/placeholder.svg"}
+            alt="87 Autos Logo"
+            className="h-12 w-auto transition-all duration-500 ease-in-out"
+          />
         </div>
 
         {/* Desktop Navigation */}
