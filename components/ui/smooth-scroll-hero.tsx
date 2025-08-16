@@ -1,10 +1,8 @@
 "use client"
 
 import type * as React from "react"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useMotionTemplate, useScroll, useTransform } from "framer-motion"
-import { LiquidButton } from "@/components/ui/liquid-glass-button"
-import { Car, Users, Calendar, Award } from "lucide-react"
 
 interface SmoothScrollHeroProps {
   scrollHeight?: number
@@ -22,6 +20,9 @@ const SmoothScrollHero: React.FC<SmoothScrollHeroProps> = ({
   finalClipPercentage = 75,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isVideoExpanded, setIsVideoExpanded] = useState(false)
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -43,149 +44,139 @@ const SmoothScrollHero: React.FC<SmoothScrollHeroProps> = ({
   const ctaOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1])
   const ctaY = useTransform(scrollYProgress, [0.3, 0.5], [50, 0])
 
+  useEffect(() => {
+    const unsubscribe = ctaOpacity.on("change", (latest) => {
+      if (latest > 0.8 && !shouldPlayVideo) {
+        setShouldPlayVideo(true)
+        if (videoRef.current) {
+          videoRef.current.play().catch(console.error)
+        }
+      } else if (latest <= 0.3 && shouldPlayVideo) {
+        setShouldPlayVideo(false)
+        if (videoRef.current) {
+          videoRef.current.pause()
+          videoRef.current.currentTime = 0
+        }
+      }
+    })
+    return unsubscribe
+  }, [ctaOpacity, shouldPlayVideo])
+
+  const handleExpandVideo = () => {
+    setIsVideoExpanded(true)
+  }
+
   return (
     <div ref={containerRef} style={{ height: `${scrollHeight}px` }} className="relative w-full">
       <motion.div
-        className="sticky top-0 h-screen w-full bg-black overflow-hidden"
+        className="sticky top-0 h-screen w-full bg-white overflow-hidden"
         style={{
           clipPath,
           willChange: "transform",
         }}
       >
-        {/* Desktop background */}
         <motion.div
-          className="absolute inset-0 hidden md:block"
+          className="absolute inset-4 border-2 border-gray-300 rounded-lg z-5"
           style={{
-            backgroundImage: `url(${desktopImage})`,
-            backgroundSize,
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            scale,
-          }}
-        />
-        {/* Mobile background */}
-        <motion.div
-          className="absolute inset-0 md:hidden"
-          style={{
-            backgroundImage: `url(${mobileImage})`,
-            backgroundSize,
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            scale,
+            opacity: useTransform(ctaOpacity, [0, 0.3], [1, 0]),
           }}
         />
 
-        {/* Dark overlay for better contrast */}
-        <div className="absolute inset-0 bg-black/40" />
-
-        <motion.div
-          className="absolute inset-0 z-10"
-          style={{
-            opacity: ctaOpacity,
-          }}
-        >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-            onLoadStart={() => console.log("[v0] Video loading started")}
-            onCanPlay={() => console.log("[v0] Video can play")}
-          >
-            <source src="https://cdn.shopify.com/videos/c/o/v/d68fe2922a8a4bb2aa1135c773587153.mp4" type="video/mp4" />
-            Tu navegador no soporta el elemento de video.
-          </video>
-          {/* Video overlay for better text contrast */}
-          <div className="absolute inset-0 bg-black/50" />
-        </motion.div>
-
-        {/* CTA Overlay */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center z-20"
-          style={{
-            opacity: ctaOpacity,
-            y: ctaY,
-          }}
-        >
-          <div className="text-center text-white max-w-4xl mx-auto px-6">
-            {/* Main CTA Heading */}
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-wider mb-6 leading-none">
-              ¿LISTO PARA
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
-                TU PRÓXIMO AUTO?
-              </span>
-            </h2>
-
-            {/* Supporting Text */}
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 leading-relaxed font-medium">
-              Únete a miles de conductores que han encontrado su vehículo perfecto,
-              <br className="hidden md:block" />
-              experimentado la ingeniería alemana y descubierto el placer de conducir.
-            </p>
-
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-              <div className="text-center">
-                <div className="flex justify-center mb-2">
-                  <div className="w-10 h-10 bg-blue-500/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <Car className="w-5 h-5 text-blue-400" />
-                  </div>
-                </div>
-                <div className="text-2xl md:text-3xl font-black text-white mb-1">200+</div>
-                <div className="text-xs md:text-sm text-gray-300 font-medium">Vehículos Vendidos</div>
-              </div>
-
-              <div className="text-center">
-                <div className="flex justify-center mb-2">
-                  <div className="w-10 h-10 bg-blue-500/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <Users className="w-5 h-5 text-blue-400" />
-                  </div>
-                </div>
-                <div className="text-2xl md:text-3xl font-black text-white mb-1">500+</div>
-                <div className="text-xs md:text-sm text-gray-300 font-medium">Clientes Satisfechos</div>
-              </div>
-
-              <div className="text-center">
-                <div className="flex justify-center mb-2">
-                  <div className="w-10 h-10 bg-blue-500/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-blue-400" />
-                  </div>
-                </div>
-                <div className="text-2xl md:text-3xl font-black text-white mb-1">15</div>
-                <div className="text-xs md:text-sm text-gray-300 font-medium">Años de Experiencia</div>
-              </div>
-
-              <div className="text-center">
-                <div className="flex justify-center mb-2">
-                  <div className="w-10 h-10 bg-blue-500/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <Award className="w-5 h-5 text-blue-400" />
-                  </div>
-                </div>
-                <div className="text-2xl md:text-3xl font-black text-white mb-1">98%</div>
-                <div className="text-xs md:text-sm text-gray-300 font-medium">Satisfacción</div>
-              </div>
-            </div>
-
-            <LiquidButton
-              size="xxl"
-              className="font-bold text-xl tracking-wide px-12 py-4 bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-600 hover:scale-105 transition-all duration-300"
+        <div className="absolute inset-0 z-10">
+          <div className="relative w-full h-full flex items-center justify-center">
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center z-20"
+              style={{
+                opacity: useTransform(ctaOpacity, [0, 0.3, 0.7], [1, 0.5, 0]),
+              }}
             >
-              RESERVAR
-            </LiquidButton>
+              <img
+                src="https://87autos.com/cdn/shop/files/logos-04_224ff7b9-c066-40d8-a14b-4ffa0f0a2efa.png?v=1727127568&width=200"
+                alt="87 Autos"
+                className="w-32 h-auto md:w-48"
+              />
+            </motion.div>
 
-            {/* Trust Indicators */}
-            <div className="mt-12 pt-6 border-t border-white/20">
-              <p className="text-xs text-gray-400 mb-3 font-medium">CONCESIONARIO AUTORIZADO</p>
-              <div className="flex flex-wrap justify-center items-center gap-4 text-gray-300">
-                <span className="text-xs font-semibold">🚗 GARANTÍA EXTENDIDA</span>
-                <span className="text-xs font-semibold">💰 FINANCIAMIENTO</span>
-                <span className="text-xs font-semibold">🔧 SERVICIO TÉCNICO</span>
-                <span className="text-xs font-semibold">📋 DOCUMENTACIÓN</span>
-              </div>
-            </div>
+            <motion.video
+              ref={videoRef}
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+              style={{
+                opacity: useTransform(ctaOpacity, [0.3, 0.7, 1], [0, 0.5, 1]),
+                scale: useTransform(ctaOpacity, [0, 1], [1.1, 1]),
+              }}
+              onLoadStart={() => console.log("[v0] Video loading started")}
+              onCanPlay={() => console.log("[v0] Video can play")}
+              onLoadedData={() => console.log("[v0] Video loaded data")}
+            >
+              <source
+                src="https://cdn.shopify.com/videos/c/o/v/d68fe2922a8a4bb2aa1135c773587153.mp4"
+                type="video/mp4"
+              />
+              Tu navegador no soporta el elemento de video.
+            </motion.video>
+
+            <motion.div
+              className="absolute bottom-8 right-16 z-30"
+              style={{
+                opacity: useTransform(ctaOpacity, [0.7, 1], [0, 1]),
+                y: useTransform(ctaOpacity, [0.7, 1], [20, 0]),
+              }}
+            >
+              <motion.button
+                className="bg-[#344acf] text-white px-8 py-4 font-semibold text-lg flex items-center gap-2 transition-all duration-300 hover:bg-[#2a3ba8] hover:shadow-lg hover:shadow-blue-500/25 rounded-md"
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 20px rgba(52, 74, 207, 0.4)",
+                }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  // Navigate to stock or contact page
+                  window.location.href = "/stock"
+                }}
+              >
+                RESERVAR
+                <motion.span
+                  className="text-xl"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  →
+                </motion.span>
+              </motion.button>
+            </motion.div>
+
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"
+              style={{
+                opacity: useTransform(ctaOpacity, [0.3, 0.8], [0, 1]),
+              }}
+            />
           </div>
+        </div>
+
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
+          style={{
+            opacity: useTransform(ctaOpacity, [0, 0.3], [1, 0]),
+          }}
+        >
+          <motion.div
+            className="flex flex-col items-center text-gray-600"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          >
+            <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+              <motion.div
+                className="w-1 h-3 bg-gray-400 rounded-full mt-2"
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              />
+            </div>
+            <span className="text-sm mt-2 font-medium">Scroll</span>
+          </motion.div>
         </motion.div>
       </motion.div>
     </div>
