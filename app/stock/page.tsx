@@ -52,13 +52,6 @@ const vehicleCategories = [
   },
 ]
 
-const vehicleFilters = [
-  { id: "all", name: "VER TODOS", icon: "🚗" },
-  { id: "electric", name: "ELÉCTRICOS", icon: "⚡" },
-  { id: "sport", name: "DEPORTIVOS", icon: "🏎️" },
-  { id: "luxury", name: "PREMIUM", icon: "✨" },
-]
-
 const modelImages = {
   "SERIE 1": "/bmw-serie-1-azul-lateral.png",
   "SERIE 2": "/bmw-serie-2-blanco-deportivo.png",
@@ -195,7 +188,6 @@ const vehicleInventory = {
 export default function StockPage() {
   const [selectedCategory, setSelectedCategory] = useState("bmw")
   const [selectedModel, setSelectedModel] = useState("")
-  const [selectedFilter, setSelectedFilter] = useState("all")
   const [showInventory, setShowInventory] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const router = useRouter()
@@ -228,6 +220,12 @@ export default function StockPage() {
     if (selectedModel && currentInventory.length > 0) {
       setShowInventory(true)
     }
+  }
+
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId)
+    setSelectedModel("")
+    setShowInventory(false)
   }
 
   return (
@@ -296,11 +294,7 @@ export default function StockPage() {
               {vehicleCategories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => {
-                    setSelectedCategory(category.id)
-                    setSelectedModel("")
-                    setShowInventory(false)
-                  }}
+                  onClick={() => handleCategoryChange(category.id)}
                   className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                     selectedCategory === category.id
                       ? "bg-blue-600 text-white"
@@ -313,46 +307,36 @@ export default function StockPage() {
             </div>
           </div>
 
-          {/* Filters */}
-          <div className="px-6 py-4 border-b border-gray-200">
-            <div className="grid grid-cols-2 gap-2">
-              {vehicleFilters.map((filter) => (
-                <button
-                  key={filter.id}
-                  onClick={() => setSelectedFilter(filter.id)}
-                  className={`p-3 text-xs font-medium rounded-lg transition-colors text-left ${
-                    selectedFilter === filter.id
-                      ? "bg-gray-200 text-gray-900"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                  }`}
-                >
-                  <div className="flex items-center space-x-2">
-                    <span>{filter.icon}</span>
-                    <span>{filter.name}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Model List */}
           <div className="px-6 py-4">
             <h3 className="text-lg font-bold mb-4 text-gray-900">{currentCategory?.name}</h3>
-            <div className="space-y-2">
-              {currentCategory?.models.map((model) => (
-                <button
-                  key={model}
-                  onClick={() => handleModelSelect(model)}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                    selectedModel === model
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
-                  }`}
-                >
-                  <div className="font-medium">{model}</div>
-                </button>
-              ))}
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedCategory}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="space-y-2"
+              >
+                {currentCategory?.models.map((model, index) => (
+                  <motion.button
+                    key={model}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    onClick={() => handleModelSelect(model)}
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                      selectedModel === model
+                        ? "bg-blue-600 text-white"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                    }`}
+                  >
+                    <div className="font-medium">{model}</div>
+                  </motion.button>
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
