@@ -1,11 +1,13 @@
 "use client"
 
-import HeroSection from "../hero-section"
+import HeroSection from "../../hero-section"
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll"
 import { Timeline } from "@/components/ui/timeline"
-import "./globals.css"
+import "../../app/globals.css"
 import SmoothScrollHero from "@/components/ui/smooth-scroll-hero"
-import Chatbot from "../components/chatbot"
+import ScrollLogoAnimation from "@/components/ui/scroll-logo-animation"
+import Chatbot from "../../components/chatbot"
+import Navbar from "../../components/navbar"
 
 export default function Page() {
   const missionStatement =
@@ -43,6 +45,9 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <Navbar />
+
       {/* Hero Section */}
       <HeroSection />
 
@@ -83,16 +88,12 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Smooth Scroll Hero with Video CTA */}
-      <section id="contact" className="relative">
-        <SmoothScrollHero
-          scrollHeight={2500}
-          desktopImage="/placeholder-5e0mw.png"
-          mobileImage="/placeholder-5e0mw.png"
-          initialClipPercentage={30}
-          finalClipPercentage={70}
-        />
+
+      {/* Animated Logo Section */}
+      <section id="animated-logo" className="relative">
+        <ScrollLogoAnimation />
       </section>
+
       <Chatbot />
     </div>
   )

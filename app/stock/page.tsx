@@ -527,9 +527,9 @@ export default function StockPage() {
         )}
       </nav>
 
-      <div className="flex pt-20">
+      <div className="flex pt-20 h-screen">
         {/* Left Sidebar */}
-        <div className="w-80 bg-gray-50 border-r border-gray-200 overflow-y-auto h-screen">
+        <div className="w-80 bg-gray-50 border-r border-gray-200 h-full flex flex-col">
           {/* Category Tabs */}
           <div className="px-6 py-4 border-b border-gray-200">
             <div className="relative">
