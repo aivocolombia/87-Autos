@@ -201,21 +201,44 @@ export default function HeroSection() {
             className={`absolute inset-0 transition-all duration-1000 ease-in-out ${getSlideAnimation(index)}`}
             style={{
               backgroundColor: slide.type === "hero" ? "transparent" : slide.background,
-              backgroundImage: slide.type === "hero" ? `url('${slide.background}')` : "none",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
             }}
           >
+            {/* Video background for hero slide */}
+            {slide.type === "hero" && (
+              <video
+                className="absolute inset-0 w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source src="https://cdn.beacons.ai/user_content/ThQS4FFE6fUzcu0A0QJWDo6j2cx2/backgrounds/home/video_background_87autos.mp4?t=1750450229075-profile" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+
+            {/* Background image for non-hero slides */}
+            {slide.type !== "hero" && (
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: `url('${slide.background}')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
+              />
+            )}
+
             {/* Dark overlay for hero slide */}
-            {slide.type === "hero" && <div className="absolute inset-0 bg-black/40" />}
+            {slide.type === "hero" && <div className="absolute inset-0 bg-black/80" />}
 
             {/* Content */}
             {slide.type === "hero" ? (
-              <div className="relative z-10 flex h-full flex-col items-center justify-start px-6 pt-20">
+              <div className="relative z-10 flex h-full items-center justify-center px-6">
                 <div className="text-center">
                   <h1
-                    className="text-xl md:text-2xl lg:text-3xl font-light tracking-widest leading-tight text-white"
+                    className="text-4xl md:text-6xl lg:text-8xl font-black tracking-widest leading-tight text-white opacity-40"
                     style={{ fontFamily: "Avenir, system-ui, sans-serif" }}
                   >
                     {slide.content.title}
