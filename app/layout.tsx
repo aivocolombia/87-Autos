@@ -43,10 +43,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${GeistSans.variable} ${GeistMono.variable} ${playfairDisplay.variable} ${montserrat.variable} ${inter.variable}`}>
       <body className={`${montserrat.className} font-sans`} suppressHydrationWarning={true}>
-        <div className="min-h-screen flex flex-col">
-          <div className="flex-1">{children}</div>
-          <Footer />
-        </div>
+        {children}
       </body>
     </html>
   )
