@@ -36,9 +36,9 @@
     --sidebar-accent-foreground: 0 0% 20%;
     --sidebar-border: 0 0% 81.5686%;
     --sidebar-ring: 0 0% 37.6471%;
-    --font-sans: Montserrat, sans-serif;
-    --font-serif: Georgia, serif;
-    --font-mono: Fira Code, monospace;
+    --font-sans: var(--font-montserrat), system-ui, sans-serif;
+    --font-serif: var(--font-playfair), Georgia, serif;
+    --font-mono: 'Fira Code', monospace;
     --radius: 0.675rem;
     --shadow-2xs: 4.5px 4.5px 0px 0px hsl(0 0% 20% / 0.16);
     --shadow-xs: 4.5px 4.5px 0px 0px hsl(0 0% 20% / 0.16);
@@ -206,4 +206,82 @@ input:focus-visible,
 textarea:focus-visible {
   outline: 2px solid #0066cc;
   outline-offset: 2px;
+}
+
+/* Luxury Typography Classes */
+.font-luxury-display {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.font-luxury-heading {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.font-luxury-body {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+}
+
+.font-luxury-caption {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.font-luxury-button {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Luxury Text Effects */
+.text-luxury-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.text-luxury-glow {
+  text-shadow: 0 0 10px rgba(53, 71, 213, 0.3), 0 0 20px rgba(53, 71, 213, 0.1);
+}
+
+.text-luxury-gradient {
+  background: linear-gradient(135deg, #3547D5, #ffffff, #3547D5);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: luxury-gradient 3s ease-in-out infinite;
+}
+
+@keyframes luxury-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Luxury Spacing */
+.tracking-luxury {
+  letter-spacing: 0.1em;
+}
+
+.tracking-luxury-wide {
+  letter-spacing: 0.15em;
+}
+
+.tracking-luxury-tight {
+  letter-spacing: -0.02em;
 }

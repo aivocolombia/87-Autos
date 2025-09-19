@@ -1,5 +1,7 @@
 "use client"
 
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import HeroSection from "../../hero-section"
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll"
 import { Timeline } from "@/components/ui/timeline"
@@ -8,8 +10,14 @@ import SmoothScrollHero from "@/components/ui/smooth-scroll-hero"
 import ScrollLogoAnimation from "@/components/ui/scroll-logo-animation"
 import Chatbot from "../../components/chatbot"
 import Navbar from "../../components/navbar"
+import Loader87 from "../../components/ui/loader-87"
 
 export default function Page() {
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  const handleLoaderComplete = () => {
+    setIsLoaded(true)
+  }
   const missionStatement =
     "En 87 Autos, creemos que conducir no es solo transporte, es una experiencia. Especializados en BMW y Mini Cooper, ofrecemos vehículos premium que combinan ingeniería alemana, diseño innovador y tecnología de vanguardia. Cada auto en nuestro showroom ha sido cuidadosamente seleccionado para brindar la máxima calidad, rendimiento y elegancia. Desde el deportivo Mini Cooper hasta los lujosos sedanes BMW, tenemos el vehículo perfecto para tu estilo de vida. Únete a la familia 87 Autos y descubre la diferencia de conducir auténtica ingeniería alemana."
 
@@ -44,30 +52,19 @@ export default function Page() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <Navbar />
+    <>
+      {/* Loader */}
+      <Loader87 onComplete={handleLoaderComplete} />
+      
+      {/* Main Content - Only show after loading */}
+      {isLoaded && (
+        <div className="min-h-screen bg-white">
+          {/* Navigation */}
+          <Navbar />
 
-      {/* Hero Section */}
-      <HeroSection />
+          {/* Hero Section */}
+          <HeroSection />
 
-      {/* Mission Statement Section with Grid Background */}
-      <section id="mission" className="relative min-h-screen flex items-center justify-center py-20 bg-white">
-        {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-subtle opacity-30 pointer-events-none" />
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl font-black tracking-wider mb-12 text-gray-900">NUESTRA MISIÓN</h2>
-            <TextGradientScroll
-              text={missionStatement}
-              className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed text-gray-800"
-              type="word"
-              textOpacity="soft"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Timeline Section */}
       <section id="vehicles" className="relative py-20 bg-white">
@@ -94,7 +91,9 @@ export default function Page() {
         <ScrollLogoAnimation />
       </section>
 
-      <Chatbot />
-    </div>
+          <Chatbot />
+        </div>
+      )}
+    </>
   )
 }

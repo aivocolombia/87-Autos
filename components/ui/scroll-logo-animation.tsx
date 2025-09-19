@@ -5,34 +5,11 @@ import { motion, useScroll, useTransform } from "framer-motion"
 
 const ScrollLogoAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [counter, setCounter] = useState(0)
-  const [isLoading, setIsLoading] = useState(true)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   })
-
-  // Loader animation - counter from 0 to 87
-  useEffect(() => {
-    if (isLoading) {
-      const interval = setInterval(() => {
-        setCounter((prev) => {
-          if (prev >= 87) {
-            clearInterval(interval)
-            setTimeout(() => setIsLoading(false), 200) // Reduced delay before showing content
-            return 87
-          }
-          return prev + 2 // Increment by 2 for faster counting
-        })
-      }, 15) // Faster speed of counting
-
-      return () => clearInterval(interval)
-    }
-  }, [isLoading])
-
-  // Background fade animation based on counter progress
-  const backgroundOpacity = isLoading ? Math.max(1 - (counter / 87) * 0.7, 0.3) : 0
 
   // Animaciones para el logo "87" (centrado desde el inicio)
   const logoScale = useTransform(scrollYProgress, [0, 0.5, 0.7], [6, 1.6, 1.6]) // Llega a 40vh al 50% y se mantiene hasta el 70%
@@ -55,46 +32,6 @@ const ScrollLogoAnimation = () => {
 
   return (
     <div ref={containerRef} className="relative h-[200vh] w-full bg-white">
-      {/* Loader Screen */}
-      {isLoading && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{
-            backgroundColor: `rgba(0, 0, 0, ${backgroundOpacity})`,
-          }}
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <motion.h1
-              className="font-black text-[25vh] select-none text-white"
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                textShadow: "0 0 40px rgba(255,255,255,0.5)",
-              }}
-            >
-              {counter}
-            </motion.h1>
-            <motion.div
-              className="mt-8"
-              initial={{ width: 0 }}
-              animate={{ width: `${(counter / 87) * 300}px` }}
-              transition={{ duration: 0.1 }}
-            >
-              <div className="h-1 bg-white rounded-full"></div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      )}
-
-      {/* Main Content - Only show after loading */}
-      {!isLoading && (
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           <motion.div
             className="flex items-center justify-center"
@@ -148,7 +85,6 @@ const ScrollLogoAnimation = () => {
             </motion.div>
           </div>
         </div>
-      )}
     </div>
   )
 }

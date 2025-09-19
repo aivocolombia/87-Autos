@@ -236,13 +236,117 @@ export default function HeroSection() {
             {/* Content */}
             {slide.type === "hero" ? (
               <div className="relative z-10 flex h-full items-center justify-center px-6">
-                <div className="text-center">
-                  <h1
-                    className="text-4xl md:text-6xl lg:text-8xl font-black tracking-widest leading-tight text-white opacity-40"
-                    style={{ fontFamily: "Avenir, system-ui, sans-serif" }}
+                <div className="text-center max-w-6xl mx-auto">
+                  {/* Logo/Brand Section */}
+                  <motion.div
+                    className="mb-8"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
                   >
-                    {slide.content.title}
-                  </h1>
+                    <motion.h1
+                      className="text-6xl md:text-8xl lg:text-9xl font-luxury-display tracking-luxury-tight text-white relative text-luxury-glow"
+                      style={{ 
+                        textShadow: "0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.1)"
+                      }}
+                      animate={{ 
+                        textShadow: [
+                          "0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.1)",
+                          "0 0 40px rgba(255, 255, 255, 0.7), 0 0 80px rgba(255, 255, 255, 0.5), 0 0 120px rgba(255, 255, 255, 0.2)",
+                          "0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.1)"
+                        ]
+                      }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      87 AUTOS
+                    </motion.h1>
+                  </motion.div>
+
+                  {/* Main Tagline */}
+                  <motion.div
+                    className="mb-12"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+                  >
+                    <motion.h2
+                      className="text-2xl md:text-4xl lg:text-5xl font-luxury-heading text-white/90 tracking-luxury leading-relaxed"
+                    >
+                      {slide.content.title}
+                    </motion.h2>
+                  </motion.div>
+
+                  {/* Subtitle with enhanced styling */}
+                  <motion.div
+                    className="mb-16"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 }}
+                  >
+                    <motion.p
+                      className="text-lg md:text-xl lg:text-2xl font-luxury-body text-white/80 tracking-luxury-wide"
+                      animate={{ 
+                        opacity: [0.8, 1, 0.8]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      El viaje comienza aquí.
+                    </motion.p>
+                  </motion.div>
+
+                  {/* Enhanced CTA Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.9 }}
+                  >
+                    <motion.button
+                      className="group relative px-12 py-4 border-2 border-white text-white font-luxury-button tracking-luxury-wide text-lg hover:bg-white hover:text-black transition-all duration-700 ease-in-out overflow-hidden"
+                      whileHover={{ 
+                        scale: 1.05,
+                        boxShadow: "0 0 30px rgba(255, 255, 255, 0.3)"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      animate={{
+                        boxShadow: [
+                          "0 0 0px rgba(255, 255, 255, 0)",
+                          "0 0 20px rgba(255, 255, 255, 0.2)",
+                          "0 0 0px rgba(255, 255, 255, 0)"
+                        ]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <span className="relative z-10">EXPLORAR VEHÍCULOS</span>
+                      <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-in-out origin-left"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+                    </motion.button>
+                  </motion.div>
+
+                  {/* Floating Elements */}
+                  <motion.div
+                    className="absolute top-20 left-10 w-2 h-2 bg-white/60 rounded-full"
+                    animate={{
+                      y: [0, -20, 0],
+                      opacity: [0.6, 1, 0.6]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                  <motion.div
+                    className="absolute top-40 right-16 w-1 h-1 bg-white/40 rounded-full"
+                    animate={{
+                      y: [0, -15, 0],
+                      opacity: [0.4, 0.8, 0.4]
+                    }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  />
+                  <motion.div
+                    className="absolute bottom-32 left-20 w-1.5 h-1.5 bg-white/50 rounded-full"
+                    animate={{
+                      y: [0, -25, 0],
+                      opacity: [0.5, 1, 0.5]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  />
                 </div>
               </div>
             ) : slide.type === "about" ? (

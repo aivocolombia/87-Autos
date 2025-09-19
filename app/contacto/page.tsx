@@ -451,10 +451,6 @@ export default function ContactoPage() {
                     </div>
                   </div>
 
-                  {/* Decorative elements */}
-                  <div className="absolute top-4 right-4 w-3 h-3 bg-blue-400 rounded-full animate-pulse" />
-                  <div className="absolute bottom-6 left-6 w-2 h-2 bg-blue-300 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-                  <div className="absolute top-1/2 right-8 w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
                 </div>
               </motion.div>
 
