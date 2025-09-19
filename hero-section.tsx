@@ -231,67 +231,35 @@ export default function HeroSection() {
             )}
 
             {/* Dark overlay for hero slide */}
-            {slide.type === "hero" && <div className="absolute inset-0 bg-black/80" />}
+            {slide.type === "hero" && <div className="absolute inset-0 bg-black/40" />}
 
             {/* Content */}
             {slide.type === "hero" ? (
               <div className="relative z-10 flex h-full items-center justify-center px-6">
-                <div className="text-center max-w-6xl mx-auto">
-                  {/* Logo/Brand Section */}
-                  <motion.div
-                    className="mb-8"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                  >
-                    <motion.h1
-                      className="text-6xl md:text-8xl lg:text-9xl font-luxury-display tracking-luxury-tight text-white relative text-luxury-glow"
-                      style={{ 
-                        textShadow: "0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.1)"
-                      }}
-                      animate={{ 
-                        textShadow: [
-                          "0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.1)",
-                          "0 0 40px rgba(255, 255, 255, 0.7), 0 0 80px rgba(255, 255, 255, 0.5), 0 0 120px rgba(255, 255, 255, 0.2)",
-                          "0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.1)"
-                        ]
-                      }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      87 AUTOS
-                    </motion.h1>
-                  </motion.div>
-
-                  {/* Main Tagline */}
+                <div className="text-left max-w-6xl mx-auto">
+                  {/* Main Tagline - Left aligned */}
                   <motion.div
                     className="mb-12"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
                   >
-                    <motion.h2
-                      className="text-2xl md:text-4xl lg:text-5xl font-luxury-heading text-white/90 tracking-luxury leading-relaxed"
+                    <motion.h1
+                      className="text-4xl md:text-6xl lg:text-7xl font-luxury-display tracking-luxury-tight text-white leading-relaxed"
+                      style={{ 
+                        textShadow: "0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.2), 0 0 90px rgba(255, 255, 255, 0.1)"
+                      }}
+                      animate={{ 
+                        textShadow: [
+                          "0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.2), 0 0 90px rgba(255, 255, 255, 0.1)",
+                          "0 0 40px rgba(255, 255, 255, 0.5), 0 0 80px rgba(255, 255, 255, 0.3), 0 0 120px rgba(255, 255, 255, 0.2)",
+                          "0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.2), 0 0 90px rgba(255, 255, 255, 0.1)"
+                        ]
+                      }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
                       {slide.content.title}
-                    </motion.h2>
-                  </motion.div>
-
-                  {/* Subtitle with enhanced styling */}
-                  <motion.div
-                    className="mb-16"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 }}
-                  >
-                    <motion.p
-                      className="text-lg md:text-xl lg:text-2xl font-luxury-body text-white/80 tracking-luxury-wide"
-                      animate={{ 
-                        opacity: [0.8, 1, 0.8]
-                      }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      El viaje comienza aquí.
-                    </motion.p>
+                    </motion.h1>
                   </motion.div>
 
                   {/* Enhanced CTA Button */}

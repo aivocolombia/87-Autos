@@ -58,41 +58,44 @@ export default function Page() {
       
       {/* Main Content - Only show after loading */}
       {isLoaded && (
-        <div className="min-h-screen bg-white">
+        <motion.div 
+          className="min-h-screen bg-white"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           {/* Navigation */}
           <Navbar />
 
           {/* Hero Section */}
           <HeroSection />
 
+          {/* Timeline Section */}
+          <section id="vehicles" className="relative py-20 bg-white">
+            {/* Subtle Grid Pattern */}
+            <div className="absolute inset-0 bg-grid-subtle opacity-30 pointer-events-none" />
 
-      {/* Timeline Section */}
-      <section id="vehicles" className="relative py-20 bg-white">
-        {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-subtle opacity-30 pointer-events-none" />
+            <div className="relative z-10">
+              <div className="container mx-auto px-6 mb-16">
+                <div className="text-center">
+                  <h2 className="text-4xl md:text-6xl font-black tracking-wider mb-6 text-gray-900">CALIDAD PREMIUM</h2>
+                  <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+                    Descubre por qué BMW y Mini Cooper son sinónimo de excelencia automotriz y estilo incomparable.
+                  </p>
+                </div>
+              </div>
 
-        <div className="relative z-10">
-          <div className="container mx-auto px-6 mb-16">
-            <div className="text-center">
-              <h2 className="text-4xl md:text-6xl font-black tracking-wider mb-6 text-gray-900">CALIDAD PREMIUM</h2>
-              <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-                Descubre por qué BMW y Mini Cooper son sinónimo de excelencia automotriz y estilo incomparable.
-              </p>
+              <Timeline entries={timelineEntries} />
             </div>
-          </div>
+          </section>
 
-          <Timeline entries={timelineEntries} />
-        </div>
-      </section>
-
-
-      {/* Animated Logo Section */}
-      <section id="animated-logo" className="relative">
-        <ScrollLogoAnimation />
-      </section>
+          {/* Animated Logo Section */}
+          <section id="animated-logo" className="relative">
+            <ScrollLogoAnimation />
+          </section>
 
           <Chatbot />
-        </div>
+        </motion.div>
       )}
     </>
   )

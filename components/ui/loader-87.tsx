@@ -18,8 +18,8 @@ export default function Loader87({ onComplete }: Loader87Props) {
           clearInterval(interval)
           setTimeout(() => {
             setIsLoading(false)
-            setTimeout(() => onComplete(), 500) // Delay before calling onComplete
-          }, 200)
+            setTimeout(() => onComplete(), 300) // Reduced delay for smoother transition
+          }, 100) // Reduced delay
           return 87
         }
         return prev + 2
@@ -38,8 +38,8 @@ export default function Loader87({ onComplete }: Loader87Props) {
             background: 'linear-gradient(135deg, #000000, #111111)'
           }}
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          exit={{ opacity: 0, scale: 1.1 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
         >
           {/* Background gradient effect */}
           <motion.div
