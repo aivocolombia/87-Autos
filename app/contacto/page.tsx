@@ -130,11 +130,11 @@ export default function ContactoPage() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-wider text-gray-900 mb-6">
+            <h1 className="text-hero-title text-gray-900 mb-6">
               HABLEMOS DE TU
               <span className="block text-blue-600">SIGUIENTE AUTO</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12">
+            <p className="text-hero-description text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12">
               Estamos aquí para hacer realidad tu sueño de conducir un BMW o Mini Cooper.
               Nuestro equipo de expertos te guiará en cada paso del proceso.
             </p>
@@ -177,10 +177,10 @@ export default function ContactoPage() {
               className="space-y-8"
             >
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-section-title text-gray-900 mb-4">
                   Envíanos un Mensaje
                 </h2>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-section-description text-gray-600 leading-relaxed">
                   Completa el formulario y nuestro equipo de expertos te contactará
                   para ayudarte a encontrar el vehículo perfecto para ti.
                 </p>
@@ -389,7 +389,7 @@ export default function ContactoPage() {
             >
               {/* Contact Info Cards */}
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Información de Contacto</h3>
+                <h3 className="text-card-title text-gray-900 mb-6">Información de Contacto</h3>
                 <div className="grid grid-cols-1 gap-6">
                   {contactInfo.map((info, index) => (
                     <motion.div
@@ -496,10 +496,10 @@ export default function ContactoPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="text-section-title mb-6">
               ¿Listo para vivir la experiencia BMW y Mini Cooper?
             </h2>
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+            <p className="text-section-description text-gray-300 mb-8 leading-relaxed">
               Nuestro equipo está preparado para hacer realidad tu sueño automotriz.
               Contáctanos hoy mismo y comienza tu viaje hacia la excelencia.
             </p>

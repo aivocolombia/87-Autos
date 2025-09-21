@@ -123,29 +123,6 @@ export default function Loader87({ onComplete }: Loader87Props) {
             </motion.div>
           </motion.div>
 
-          {/* Floating particles */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 rounded-full"
-              style={{
-                background: 'linear-gradient(135deg, #3547D5, #ffffff)',
-                left: `${20 + i * 15}%`,
-                top: `${30 + (i % 3) * 20}%`
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.3, 1, 0.3],
-                scale: [0.8, 1.2, 0.8]
-              }}
-              transition={{
-                duration: 2 + i * 0.3,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.2
-              }}
-            />
-          ))}
         </motion.div>
       )}
     </AnimatePresence>

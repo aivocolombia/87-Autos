@@ -47,6 +47,7 @@ const ScrollLogoAnimation = () => {
             }}
           >
             <motion.div className="relative flex items-center justify-center">
+              {/* 87 Number with video inside */}
               <motion.h1
                 className="font-black text-[25vh] select-none absolute inset-0 flex items-center justify-center"
                 style={{
@@ -58,6 +59,29 @@ const ScrollLogoAnimation = () => {
               >
                 87
               </motion.h1>
+
+              {/* Video background */}
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  opacity: logoNumberOpacity,
+                  scale: logoScale,
+                }}
+              >
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={{
+                    filter: logoFilter,
+                  }}
+                >
+                  <source src="https://cdn.beacons.ai/user_content/ThQS4FFE6fUzcu0A0QJWDo6j2cx2/backgrounds/home/video_background_87autos.mp4?t=1750450229075-profile" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </motion.div>
 
               <motion.img
                 src="https://87autos.com/cdn/shop/files/logos-04_224ff7b9-c066-40d8-a14b-4ffa0f0a2efa.png?v=1727127568&width=200"

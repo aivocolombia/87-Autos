@@ -147,11 +147,26 @@ export default function Navbar() {
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
         >
-                <img
-                  src={getCurrentLogo()}
-                  alt="87 Autos Logo"
-                  className="h-6 md:h-8 w-auto transition-all duration-500 ease-in-out"
-                />
+          <div className="relative">
+            <img
+              src={getCurrentLogo()}
+              alt="87 Autos Logo"
+              className="h-6 md:h-8 w-auto transition-all duration-500 ease-in-out relative z-10"
+              style={{
+                filter: 'brightness(0) saturate(100%) invert(25%) sepia(45%) saturate(2000%) hue-rotate(200deg) brightness(110%) contrast(120%)'
+              }}
+            />
+            <img
+              src={getCurrentLogo()}
+              alt="87 Autos Logo"
+              className="h-6 md:h-8 w-auto absolute top-0 left-0 z-0"
+              style={{
+                filter: 'brightness(0) saturate(100%) invert(100%)',
+                transform: 'scale(1.12)',
+                transformOrigin: 'center'
+              }}
+            />
+          </div>
         </motion.div>
 
         {/* Desktop Navigation */}

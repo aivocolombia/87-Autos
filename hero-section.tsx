@@ -345,7 +345,7 @@ export default function HeroSection() {
                   />
                 </motion.div>
               </div>
-            ) : (
+            ) : slide.type === "brands" ? (
               <div className="relative z-10 flex h-full items-start justify-start px-6 pt-32">
                 <div className="text-left max-w-2xl text-gray-900">
                   <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-wider mb-4 leading-none">
@@ -360,7 +360,7 @@ export default function HeroSection() {
                   )}
                 </div>
               </div>
-            )}
+            ) : null}
           </div>
         ))}
       </div>

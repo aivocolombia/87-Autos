@@ -243,15 +243,6 @@ export default function Vehiculos2() {
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-40 right-16 w-2 h-2 rounded-full bg-white/30"
-          animate={{
-            y: [0, -15, 0],
-            opacity: [0.3, 0.7, 0.3],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
-        <motion.div
           className="absolute bottom-32 left-20 w-2.5 h-2.5 rounded-full bg-white/25"
           animate={{
             y: [0, -25, 0],
@@ -269,7 +260,7 @@ export default function Vehiculos2() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             <motion.h1
-              className="text-5xl md:text-7xl lg:text-8xl font-luxury-display tracking-luxury-tight text-white mb-8"
+              className="text-hero-title text-white mb-8"
               style={{ 
                 textShadow: "0 0 40px rgba(255, 255, 255, 0.3), 0 0 80px rgba(255, 255, 255, 0.1)"
               }}
@@ -293,7 +284,7 @@ export default function Vehiculos2() {
             />
             
             <motion.p
-              className="text-xl md:text-2xl font-luxury-body text-white/80 max-w-3xl mx-auto leading-relaxed"
+              className="text-hero-description text-white/80 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
@@ -315,7 +306,7 @@ export default function Vehiculos2() {
         >
           <motion.button
             onClick={() => setIsFiltersOpen(true)}
-            className="group relative px-8 py-4 bg-gradient-to-r from-gray-900 to-black text-white font-luxury-button tracking-luxury-wide rounded-2xl hover:shadow-2xl transition-all duration-500 overflow-hidden"
+            className="group relative px-8 py-4 bg-gradient-to-r from-gray-900 to-black text-white text-button-primary rounded-2xl hover:shadow-2xl transition-all duration-500 overflow-hidden"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >

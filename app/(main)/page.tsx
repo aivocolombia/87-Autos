@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import HeroSection from "../../hero-section"
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll"
@@ -12,16 +12,13 @@ import Chatbot from "../../components/chatbot"
 import Navbar from "../../components/navbar"
 import Loader87 from "../../components/ui/loader-87"
 import Footer from "../../components/footer"
+import BackgroundSection from "../../components/background-section"
 
 export default function Page() {
   const [isLoaded, setIsLoaded] = useState(false)
 
   const handleLoaderComplete = () => {
     setIsLoaded(true)
-    // Scroll to top of the page after loader completes
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, 100)
   }
   const missionStatement =
     "En 87 Autos, creemos que conducir no es solo transporte, es una experiencia. Especializados en BMW y Mini Cooper, ofrecemos vehículos premium que combinan ingeniería alemana, diseño innovador y tecnología de vanguardia. Cada auto en nuestro showroom ha sido cuidadosamente seleccionado para brindar la máxima calidad, rendimiento y elegancia. Desde el deportivo Mini Cooper hasta los lujosos sedanes BMW, tenemos el vehículo perfecto para tu estilo de vida. Únete a la familia 87 Autos y descubre la diferencia de conducir auténtica ingeniería alemana."
@@ -29,7 +26,7 @@ export default function Page() {
   const timelineEntries = [
     {
       id: 1,
-      image: "/luxury-sedan-showroom.png",
+      video: "/videos/Sedán_BMW_Azul_en_Sala_de_Exhibición.mp4",
       alt: "BMW sedan de lujo en showroom",
       title: "Ingeniería Alemana",
       description:
@@ -84,8 +81,8 @@ export default function Page() {
               <div className="relative z-10">
                 <div className="container mx-auto px-6 mb-16">
                   <div className="text-center">
-                    <h2 className="text-4xl md:text-6xl font-black tracking-wider mb-6 text-gray-900">CALIDAD PREMIUM</h2>
-                    <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+                    <h2 className="text-section-title mb-6 text-gray-900">CALIDAD PREMIUM</h2>
+                    <p className="text-section-description text-gray-600 max-w-3xl mx-auto">
                       Descubre por qué BMW y Mini Cooper son sinónimo de excelencia automotriz y estilo incomparable.
                     </p>
                   </div>
@@ -99,6 +96,9 @@ export default function Page() {
             <section id="animated-logo" className="relative">
               <ScrollLogoAnimation />
             </section>
+
+            {/* Background Section with Video and Overlay CTA */}
+            <BackgroundSection />
 
             <Chatbot />
           </motion.div>

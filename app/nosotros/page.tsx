@@ -69,7 +69,7 @@ export default function NosotrosPage() {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h1
-              className="text-5xl md:text-7xl font-luxury-display tracking-luxury-tight text-gray-900 mb-8"
+              className="text-section-title text-gray-900 mb-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -77,7 +77,7 @@ export default function NosotrosPage() {
               NOSOTROS
             </motion.h1>
             <motion.p
-              className="text-xl md:text-2xl font-luxury-body text-gray-700 max-w-3xl mx-auto"
+              className="text-section-description text-gray-700 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -100,7 +100,7 @@ export default function NosotrosPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-6xl font-luxury-display tracking-luxury-tight text-gray-900 mb-8">
+              <h2 className="text-section-title text-gray-900 mb-8">
                 NUESTRA MISIÓN
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto"></div>
@@ -205,10 +205,10 @@ export default function NosotrosPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-luxury-display tracking-luxury-tight text-gray-900 mb-8">
+              <h2 className="text-section-title text-gray-900 mb-8">
                 NUESTROS VALORES
               </h2>
-              <p className="text-xl font-luxury-body text-gray-700 max-w-3xl mx-auto">
+              <p className="text-section-description text-gray-700 max-w-3xl mx-auto">
                 Los principios que guían cada decisión y cada interacción con nuestros clientes
               </p>
             </motion.div>
@@ -225,8 +225,8 @@ export default function NosotrosPage() {
                   whileHover={{ y: -5 }}
                 >
                   <div className="text-4xl mb-4">{value.icon}</div>
-                  <h3 className="text-xl font-luxury-heading text-gray-900 mb-4">{value.title}</h3>
-                  <p className="text-gray-600 font-luxury-body leading-relaxed">{value.description}</p>
+                  <h3 className="text-card-title text-gray-900 mb-4">{value.title}</h3>
+                  <p className="text-gray-600 text-card-description leading-relaxed">{value.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -245,7 +245,7 @@ export default function NosotrosPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-luxury-display tracking-luxury-tight text-gray-900 mb-8">
+              <h2 className="text-section-title text-gray-900 mb-8">
                 NUESTRA HISTORIA
               </h2>
               <p className="text-xl font-luxury-body text-gray-700">
@@ -269,8 +269,8 @@ export default function NosotrosPage() {
                     </div>
                   </div>
                   <div className="flex-1 bg-gray-50 border border-gray-200 rounded-2xl p-6">
-                    <h3 className="text-xl font-luxury-heading text-gray-900 mb-3">{item.title}</h3>
-                    <p className="text-gray-700 font-luxury-body leading-relaxed">{item.description}</p>
+                    <h3 className="text-card-title text-gray-900 mb-3">{item.title}</h3>
+                    <p className="text-gray-700 text-card-description leading-relaxed">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -290,10 +290,10 @@ export default function NosotrosPage() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-luxury-display tracking-luxury-tight text-gray-900 mb-8">
+              <h2 className="text-section-title text-gray-900 mb-8">
                 NUESTRO EQUIPO
               </h2>
-              <p className="text-xl font-luxury-body text-gray-700 max-w-3xl mx-auto">
+              <p className="text-section-description text-gray-700 max-w-3xl mx-auto">
                 Los carros transmiten historias, sueños y metas, nosotros somos la mano que te ayuda a avanzar hacia ellas. Somos tu familia y haremos que tus sueños se hagan realidad con la mejor experiencia.
               </p>
             </motion.div>
