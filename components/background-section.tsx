@@ -1,43 +1,17 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useRef, useEffect } from "react"
 
 export default function BackgroundSection() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    const handleTimeUpdate = () => {
-      // Pause video at 70% of its duration (adjust this value as needed)
-      const pauseTime = video.duration * 0.7
-      if (video.currentTime >= pauseTime) {
-        video.pause()
-      }
-    }
-
-    video.addEventListener('timeupdate', handleTimeUpdate)
-
-    return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate)
-    }
-  }, [])
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Background Video */}
-      <video
-        ref={videoRef}
+      {/* Background Image */}
+      <img
+        src="/images/transition/1. luz apagada.png"
+        alt="Transición de luz apagada"
         className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        muted
-        playsInline
-        preload="metadata"
-      >
-        <source src="/videos/transition_bmw.mp4" type="video/mp4" />
-      </video>
+      />
 
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-black/40" />
