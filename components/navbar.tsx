@@ -138,29 +138,16 @@ export default function Navbar() {
           borderBottom: '1px solid rgba(53, 71, 213, 0.1)'
         }}
       >
-        {/* Logo */}
-        <div className="flex items-center hover:scale-105 transition-transform duration-200">
-          <div className="relative">
-            <img
-              src={getCurrentLogo()}
-              alt="87 Autos Logo"
-              className="h-6 md:h-8 w-auto transition-all duration-500 ease-in-out relative z-10"
-              style={{
-                filter: 'brightness(0) saturate(100%) invert(25%) sepia(45%) saturate(2000%) hue-rotate(200deg) brightness(110%) contrast(120%)'
-              }}
-            />
-            <img
-              src={getCurrentLogo()}
-              alt="87 Autos Logo"
-              className="h-6 md:h-8 w-auto absolute top-0 left-0 z-0"
-              style={{
-                filter: 'brightness(0) saturate(100%) invert(100%)',
-                transform: 'scale(1.12)',
-                transformOrigin: 'center'
-              }}
-            />
+          {/* Logo */}
+          <div className="flex items-center hover:scale-105 transition-transform duration-200">
+            <div className="relative">
+              <img
+                src="/svg/LOGO_EN_BLANCO 1.svg"
+                alt="87 Autos Logo"
+                className="h-6 md:h-8 w-auto transition-all duration-500 ease-in-out relative z-10"
+              />
+            </div>
           </div>
-        </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
@@ -230,16 +217,24 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Navigation Menu */}
-      {isMenuOpen && (
-        <div
-          className="fixed top-0 left-0 w-full h-full z-40 md:hidden transition-opacity duration-300"
-          style={{
-            background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8))',
-            backdropFilter: 'blur(10px)'
-          }}
-        >
-          <div className="flex flex-col items-center justify-center h-full space-y-8 px-6">
+        {/* Mobile Navigation Menu */}
+        {isMenuOpen && (
+          <div
+            className="fixed top-0 left-0 w-full h-full z-40 md:hidden transition-opacity duration-300"
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8))',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
+            {/* Mobile Logo */}
+            <div className="absolute top-4 left-4">
+              <img
+                src="/svg/LOGO_EN_BLANCO 1.svg"
+                alt="87 Autos Logo"
+                className="h-8 w-auto"
+              />
+            </div>
+            <div className="flex flex-col items-center justify-center h-full space-y-8 px-6">
             {navItems.map((item, index) => (
               <button
                 key={item.name}
