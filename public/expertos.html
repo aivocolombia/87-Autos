@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expertos | 87 Autos - Concesionario BMW y Mini Cooper</title>
+    <meta name="description" content="Conoce al equipo de expertos en BMW y Mini Cooper de 87 Autos. Profesionales apasionados por la excelencia automotriz.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Luxury Color Palette */
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-gold: #B8860B;
+            --accent-red: #DC143C;
+            --dark-bg: #000000;
+            --light-bg: #111111;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 2rem 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 1.5rem 3rem;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #1a1a1a;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0066cc;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: #666;
+            max-width: 600px;
+            line-height: 1.4;
+            margin-bottom: 4rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .hero-cta:hover {
+            background: #0066cc;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        }
+
+        /* Floating Elements */
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.05));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 8rem 0;
+            background: #ffffff;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.3rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+        }
+
+        .team-member {
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .team-member.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-member:nth-child(even) {
+            transform: translateY(50px) translateX(30px);
+        }
+
+        .team-member:nth-child(odd) {
+            transform: translateY(50px) translateX(-30px);
+        }
+
+        .member-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            background: #f8f9fa;
+            aspect-ratio: 4/5;
+        }
+
+        .member-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+            filter: grayscale(20%);
+        }
+
+        .member-image-container:hover .member-image {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .member-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 102, 204, 0.1), rgba(0, 102, 204, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .member-image-container:hover .member-overlay {
+            opacity: 1;
+        }
+
+        .member-info {
+            position: relative;
+        }
+
+        .member-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .member-role {
+            font-size: 1.1rem;
+            color: #0066cc;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .member-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .member-quote::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: #0066cc;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .stat-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #ccc;
+            font-weight: 400;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 0;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-text {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button.primary {
+            background: #0066cc;
+            color: white;
+        }
+
+        .cta-button.primary:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: #1a1a1a;
+            border: 2px solid #1a1a1a;
+        }
+
+        .cta-button.secondary:hover {
+            background: #1a1a1a;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 0 2rem;
+            background: #1a1a1a;
+            color: #ccc;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #0066cc;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            grid-column: span 2;
+        }
+
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo-img {
+            height: 2rem;
+            width: auto;
+        }
+
+        .footer-brand-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-description {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid #666;
+            border-radius: 50%;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            border-color: #0066cc;
+            color: #0066cc;
+            transform: translateY(-2px);
+        }
+
+        .footer-heading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-nav-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-nav-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-nav-link {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav-link:hover {
+            color: #0066cc;
+        }
+
+        .footer-contact-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-contact-icon {
+            color: #0066cc;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .footer-contact-text,
+        .footer-contact-link {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact-link:hover {
+            color: #0066cc;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-link {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-link:hover {
+            color: #0066cc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 2rem;
+            }
+
+            .hero {
+                padding: 6rem 0 4rem;
+            }
+
+            .hero-content {
+                padding: 0 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 0 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                padding: 0 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-brand {
+                grid-column: span 1;
+            }
+
+            .footer-logo-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                padding: 0 2rem;
+            }
+
+            .footer-social {
+                gap: 0.75rem;
+            }
+
+            .social-link {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slide-in-left.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slide-in-right.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">87 AUTOS</a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Inicio</a>
+                <a href="/stock" class="nav-link">Vehículos</a>
+                <a href="#expertos" class="nav-link active">Expertos</a>
+                <a href="#contacto" class="nav-link">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title fade-in">Conoce a los Expertos</h1>
+            <p class="hero-subtitle fade-in">
+                Detrás de cada BMW y Mini Cooper que entregamos, hay un equipo de profesionales apasionados
+                por la excelencia automotriz y el servicio premium.
+            </p>
+            <a href="#equipo" class="hero-cta fade-in">
+                <span>Descubre el Equipo</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="equipo">
+        <div class="section-header">
+            <h2 class="section-title">Nuestro Equipo de Expertos</h2>
+            <p class="section-description">
+                Profesionales con décadas de experiencia en el mundo automotriz,
+                dedicados a brindarte la mejor experiencia con BMW y Mini Cooper.
+            </p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="/placeholder-user.jpg" alt="Carlos Rodríguez - Gerente General" class="member-image">
+                    <div class="member-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Carlos Rodríguez</h3>
+                    <p class="member-role">Gerente General</p>
+                    <blockquote class="member-quote">
+                        "Cada cliente merece una experiencia excepcional. Mi pasión es asegurarme de que encuentres el vehículo perfecto para tu estilo de vida."
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="/placeholder-user.jpg" alt="María González - Especialista BMW" class="member-image">
+                    <div class="member-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">María González</h3>
+                    <p class="member-role">Especialista BMW</p>
+                    <blockquote class="member-quote">
+                        "BMW representa la perfecta fusión entre tecnología de vanguardia y diseño atemporal. Vivo para compartir esta pasión con nuestros clientes."
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="/placeholder-user.jpg" alt="Andrés López - Experto Mini Cooper" class="member-image">
+                    <div class="member-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Andrés López</h3>
+                    <p class="member-role">Experto Mini Cooper</p>
+                    <blockquote class="member-quote">
+                        "Mini Cooper no es solo un auto, es una declaración de personalidad. Ayudo a nuestros clientes a encontrar su match perfecto."
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="/placeholder-user.jpg" alt="Laura Martínez - Asesora Financiera" class="member-image">
+                    <div class="member-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Laura Martínez</h3>
+                    <p class="member-role">Asesora Financiera</p>
+                    <blockquote class="member-quote">
+                        "Hacer realidad el sueño de conducir un BMW o Mini Cooper no debería ser complicado. Estoy aquí para hacer que suceda."
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="/placeholder-user.jpg" alt="Roberto Sánchez - Jefe de Taller" class="member-image">
+                    <div class="member-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Roberto Sánchez</h3>
+                    <p class="member-role">Jefe de Taller</p>
+                    <blockquote class="member-quote">
+                        "La calidad no es un acto, es un hábito. Cada vehículo que sale de nuestro taller refleja nuestro compromiso con la excelencia."
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image-container">
+                    <img src="/placeholder-user.jpg" alt="Isabella Torres - Coordinadora de Servicio" class="member-image">
+                    <div class="member-overlay"></div>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Isabella Torres</h3>
+                    <p class="member-role">Coordinadora de Servicio</p>
+                    <blockquote class="member-quote">
+                        "El servicio al cliente es el corazón de nuestro negocio. Cada interacción es una oportunidad para crear una experiencia memorable."
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <p class="stat-label">Años de Experiencia</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5000+</span>
+                <p class="stat-label">Vehículos Entregados</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <p class="stat-label">Satisfacción del Cliente</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <p class="stat-label">Soporte Disponible</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">¿Listo para Vivir la Experiencia Premium?</h2>
+            <p class="cta-text">
+                Nuestro equipo de expertos está preparado para ayudarte a encontrar el BMW o Mini Cooper
+                perfecto para ti. Contáctanos hoy y comienza tu viaje hacia la excelencia automotriz.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/573195792747" class="cta-button primary">
+                    <span>Contactar Ahora</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                    </svg>
+                </a>
+                <a href="/stock" class="cta-button secondary">
+                    <span>Ver Inventario</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <div class="footer-logo-container">
+                        <img
+                            src="https://87autos.com/cdn/shop/files/logos-04_224ff7b9-c066-40d8-a14b-4ffa0f0a2efa.png?v=1727127568&width=200"
+                            alt="87 Autos Logo"
+                            class="footer-logo-img"
+                        />
+                        <div class="footer-brand-text">87 AUTOS</div>
+                    </div>
+                    <p class="footer-description">
+                        Concesionario premium especializado en BMW y Mini Cooper. Vehículos de calidad, financiamiento y garantía extendida.
+                    </p>
+
+                    <!-- Social Links -->
+                    <div class="footer-social">
+                        <a href="https://instagram.com/87autos" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://facebook.com/87autos" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/573195792747" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.386"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="footer-nav">
+                    <h4 class="footer-heading">NAVEGACIÓN</h4>
+                    <ul class="footer-nav-list">
+                        <li><a href="/" class="footer-nav-link">Inicio</a></li>
+                        <li><a href="/stock" class="footer-nav-link">Vehículos</a></li>
+                        <li><a href="#testimonials" class="footer-nav-link">Testimonios</a></li>
+                        <li><a href="#contact" class="footer-nav-link">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-contact">
+                    <h4 class="footer-heading">CONTACTO</h4>
+                    <div class="footer-contact-list">
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="footer-contact-icon">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <span class="footer-contact-text">Bogotá, Colombia</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="footer-contact-icon">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <a href="mailto:info@87autos.com" class="footer-contact-link">info@87autos.com</a>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="footer-contact-icon">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <a href="tel:+573195792747" class="footer-contact-link">+57 319 579 2747</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2024 87 Autos. Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="/privacy" class="footer-bottom-link">Política de Privacidad</a>
+                    <a href="/terms" class="footer-bottom-link">Términos de Servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.team-member, .stat-item, .fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Image hover effects
+        document.querySelectorAll('.member-image-container').forEach(container => {
+            container.addEventListener('mouseenter', function() {
+                const image = this.querySelector('.member-image');
+                image.style.transform = 'scale(1.05)';
+            });
+
+            container.addEventListener('mouseleave', function() {
+                const image = this.querySelector('.member-image');
+                image.style.transform = 'scale(1)';
+            });
+        });
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+
+            document.querySelectorAll('.floating-shape').forEach((shape, index) => {
+                const speed = (index + 1) * 0.1;
+                shape.style.transform = `translateY(${rate * speed}px)`;
+            });
+        });
+
+        // Dynamic text animation on load
+        window.addEventListener('load', function() {
+            const heroElements = document.querySelectorAll('.hero .fade-in');
+            heroElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('animate');
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

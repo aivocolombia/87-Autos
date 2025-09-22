@@ -527,9 +527,9 @@ export default function StockPage() {
         )}
       </nav>
 
-      <div className="flex pt-20">
+      <div className="flex pt-20 h-screen">
         {/* Left Sidebar */}
-        <div className="w-80 bg-gray-50 border-r border-gray-200 overflow-y-auto h-screen">
+        <div className="w-80 bg-gray-50 border-r border-gray-200 h-full flex flex-col">
           {/* Category Tabs */}
           <div className="px-6 py-4 border-b border-gray-200">
             <div className="relative">
@@ -633,7 +633,7 @@ export default function StockPage() {
 
                 {/* Vehicle Title and Description */}
                 <div className="mb-8">
-                  <h1 className="text-4xl font-bold text-white mb-4">
+                  <h1 className="text-section-title text-white mb-4">
                     {selectedVehicle.year} {selectedModel}
                   </h1>
                   <p className="text-gray-300 leading-relaxed">
@@ -645,7 +645,7 @@ export default function StockPage() {
 
                 {/* Specifications */}
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-white mb-6">Especificaciones</h2>
+                  <h2 className="text-card-title text-white mb-6">Especificaciones</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                       <div className="flex justify-between py-3 border-b border-gray-700">
@@ -704,7 +704,7 @@ export default function StockPage() {
 
                 {/* Additional Details */}
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-white mb-6">Detalles Adicionales</h2>
+                  <h2 className="text-card-title text-white mb-6">Detalles Adicionales</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                       <div className="py-3 border-b border-gray-700">
@@ -774,10 +774,10 @@ export default function StockPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                   >
-                    <h1 className="text-5xl md:text-7xl font-black mb-4 leading-tight text-gray-900">
+                    <h1 className="text-hero-title mb-4 leading-tight text-gray-900">
                       {selectedModel || "SELECCIONA UN MODELO"}
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-700 mb-6 italic">The Others Just Travel.</p>
+                    <p className="text-hero-description text-gray-700 mb-6 italic">The Others Just Travel.</p>
 
                     {selectedModel && currentInventory.length > 0 && (
                       <div className="flex items-center space-x-4">
@@ -807,7 +807,7 @@ export default function StockPage() {
                 <button onClick={() => setShowInventory(false)} className="text-blue-600 hover:text-blue-700 mb-4">
                   ← Volver a {selectedModel}
                 </button>
-                <h1 className="text-4xl font-bold mb-2 text-gray-900">{selectedModel} - Vehículos Disponibles</h1>
+                <h1 className="text-section-title mb-2 text-gray-900">{selectedModel} - Vehículos Disponibles</h1>
                 <p className="text-gray-600">Encontramos {currentInventory.length} vehículos disponibles</p>
               </div>
 

@@ -1,12 +1,13 @@
 "use client"
 
 import { useScroll, useTransform, motion } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
 interface TimelineEntry {
   id: number
-  image: string
+  image?: string
+  video?: string
   alt: string
   title: string
   description: string
@@ -45,6 +46,11 @@ interface TimelineItemProps {
 
 function TimelineItem({ entry, index, scrollProgress }: TimelineItemProps) {
   const itemRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [isScrollingUp, setIsScrollingUp] = useState(false)
+  
   const { scrollYProgress: itemProgress } = useScroll({
     target: itemRef,
     offset: ["start center", "end center"],
@@ -54,6 +60,78 @@ function TimelineItem({ entry, index, scrollProgress }: TimelineItemProps) {
   const scale = useTransform(itemProgress, [0, 0.3, 0.7, 1], [0.8, 1, 1, 0.8])
 
   const isLeft = entry.layout === "left"
+
+  // Scroll-telling: smooth video sync with scroll position
+  useEffect(() => {
+    if (!entry.video || !isVideoLoaded || !videoRef.current) return
+
+    let rafId: number
+    let lastScrollTime = 0
+    const scrollThrottle = 8 // ~120fps for ultra-smooth sync
+
+    const handleScroll = () => {
+      const now = Date.now()
+      if (now - lastScrollTime < scrollThrottle) return
+      lastScrollTime = now
+
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
+
+      rafId = requestAnimationFrame(() => {
+        if (!itemRef.current || !videoRef.current) return
+
+        const currentScrollY = window.scrollY
+        const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up'
+        setIsScrollingUp(scrollDirection === 'up')
+        setLastScrollY(currentScrollY)
+
+        const rect = itemRef.current.getBoundingClientRect()
+        const windowHeight = window.innerHeight
+        
+        // Check if item is in viewport
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          // Calculate scroll progress through the item (0 to 1)
+          const itemTop = rect.top
+          const itemBottom = rect.bottom
+          const itemHeight = rect.height
+          
+          // Calculate how much of the item has been scrolled through
+          const scrolledThrough = Math.max(0, windowHeight - itemTop)
+          const totalScrollableHeight = windowHeight + itemHeight
+          const scrollProgress = Math.min(1, Math.max(0, scrolledThrough / totalScrollableHeight))
+          
+          // Map scroll progress to video time (0 to 5 seconds)
+          const targetTime = scrollProgress * 5
+          
+          // Smooth interpolation to target time
+          const currentTime = videoRef.current.currentTime
+          const timeDifference = targetTime - currentTime
+          
+          // Apply smooth easing for natural movement
+          const easingFactor = 0.15 // Higher = more responsive, lower = smoother
+          const newTime = currentTime + (timeDifference * easingFactor)
+          
+          // Clamp to 0-5 seconds range
+          videoRef.current.currentTime = Math.max(0, Math.min(5, newTime))
+        }
+      })
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Initial call
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
+    }
+  }, [isVideoLoaded, entry.video])
+
+  const handleVideoLoad = () => {
+    setIsVideoLoaded(true)
+  }
 
   return (
     <motion.div ref={itemRef} style={{ opacity, scale }} className="relative mb-20 md:mb-32">
@@ -75,11 +153,24 @@ function TimelineItem({ entry, index, scrollProgress }: TimelineItemProps) {
           >
             <div className="sticky top-20">
               <div className="relative overflow-hidden rounded-2xl aspect-[3/4] bg-gray-100">
-                <img
-                  src={entry.image || "/placeholder.svg"}
-                  alt={entry.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                />
+                {entry.video ? (
+                  <video
+                    ref={videoRef}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    muted
+                    playsInline
+                    preload="auto"
+                    onLoadedData={handleVideoLoad}
+                  >
+                    <source src={entry.video} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img
+                    src={entry.image || "/placeholder.svg"}
+                    alt={entry.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                )}
                 <div className="absolute inset-0 bg-black/10" />
               </div>
             </div>
