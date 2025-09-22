@@ -9,6 +9,7 @@ export default function HeroSection() {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [lastScrollTime, setLastScrollTime] = useState(0)
   const [scrollDirection, setScrollDirection] = useState<"up" | "down" | null>(null)
+  const [motoHasMoved, setMotoHasMoved] = useState(false)
 
   const slides = [
     {
@@ -66,7 +67,7 @@ export default function HeroSection() {
         if (currentSlide === 0) {
           setCurrentSlide(1) // Must go to slide 1 first
         } else if (currentSlide === 1) {
-          setCurrentSlide(2) // Then to slide 2
+          setCurrentSlide(2) // Allow advancing to slide 2
         } else if (currentSlide === 2) {
           // Unlock scroll when reaching last slide
           setIsScrollLocked(false)
@@ -100,8 +101,7 @@ export default function HeroSection() {
         if (currentSlide === 0) {
           setCurrentSlide(1) // Must go to slide 1 first
         } else if (currentSlide === 1) {
-          // Stay on slide 1 - don't auto-advance to slide 2
-          // User needs to scroll again to move forward
+          setCurrentSlide(2) // Allow advancing to slide 2
         } else if (currentSlide === 2) {
           setIsScrollLocked(false)
           document.body.style.overflow = "auto"
@@ -158,6 +158,15 @@ export default function HeroSection() {
       document.body.style.overflow = "auto"
     }
   }, [])
+
+  // Control moto animation - move immediately when page loads
+  useEffect(() => {
+    if (currentSlide === 1) {
+      setMotoHasMoved(true)
+    } else if (currentSlide === 0) {
+      setMotoHasMoved(false)
+    }
+  }, [currentSlide])
 
 
   const getSlideAnimation = (index: number) => {
@@ -335,7 +344,7 @@ export default function HeroSection() {
                   className="hidden lg:block absolute top-1/2 transform -translate-y-1/2"
                   style={{ zIndex: 5 }}
                   initial={{ left: "-400px" }}
-                  animate={{ left: currentSlide >= 1 ? "calc(100vw - 768px)" : "-400px" }}
+                  animate={{ left: motoHasMoved ? "calc(100vw - 768px)" : "-400px" }}
                   transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
                 >
                   <img
