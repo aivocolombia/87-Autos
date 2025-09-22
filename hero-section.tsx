@@ -235,7 +235,7 @@ export default function HeroSection() {
 
             {/* Content */}
             {slide.type === "hero" ? (
-              <div className="relative z-10 flex h-full items-center justify-center px-6">
+              <div className="relative z-10 flex h-full items-center justify-center px-24">
                 <div className="text-left max-w-6xl mx-auto">
                   {/* Main Tagline - Left aligned */}
                   <motion.div
@@ -318,7 +318,7 @@ export default function HeroSection() {
                 </div>
               </div>
             ) : slide.type === "about" ? (
-              <div className="relative z-10 flex h-full items-center justify-between px-6">
+              <div className="relative z-10 flex h-full items-center justify-between px-24">
                 <div className="text-left max-w-xl text-white relative z-10">
                   <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-wider mb-4 leading-none">
                     {slide.content.title}
@@ -335,19 +335,26 @@ export default function HeroSection() {
                   className="hidden lg:block absolute top-1/2 transform -translate-y-1/2"
                   style={{ zIndex: 5 }}
                   initial={{ left: "-400px" }}
-                  animate={{ left: currentSlide === 1 ? "calc(100vw - 400px)" : "-400px" }}
+                  animate={{ left: currentSlide >= 1 ? "calc(100vw - 768px)" : "-400px" }}
                   transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
                 >
                   <img
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/motocicleta-bmw-s-1000-rr-plano-general-lateral__1_-removebg-preview-9YiERalvKJpV5ms1RrOMgc76pnTRYj.png"
                     alt="BMW S 1000 RR Motorcycle"
-                    className="w-96 h-auto object-contain"
+                    className="w-[768px] h-auto object-contain"
                   />
                 </motion.div>
               </div>
             ) : slide.type === "brands" ? (
-              <div className="relative z-10 flex h-full items-start justify-start px-6 pt-32">
-                <div className="text-left max-w-2xl text-gray-900">
+              <div className="relative z-10 flex h-full items-center justify-between px-24">
+                <div className="w-1/2 flex justify-center">
+                  <img
+                    src="/bmw-3-series-luxury-dashboard.png"
+                    alt="BMW 3 Series Luxury Dashboard"
+                    className="w-full max-w-[650px] h-auto object-contain"
+                  />
+                </div>
+                <div className="w-1/2 text-right max-w-2xl text-gray-900">
                   <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-wider mb-4 leading-none">
                     {slide.content.title}
                     <br />

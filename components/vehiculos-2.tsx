@@ -534,10 +534,16 @@ export default function Vehiculos2() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 50 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white rounded-3xl shadow-2xl z-50 w-full max-w-lg mx-4 max-h-[calc(100vh-2rem)] overflow-y-auto"
+              className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+              onClick={() => setIsFiltersOpen(false)}
             >
-              {/* Header */}
-              <div className="flex items-center justify-between p-8 border-b border-gray-100">
+              {/* Modal Content */}
+              <div 
+                className="bg-white rounded-3xl shadow-2xl w-full max-w-lg mx-4 max-h-[calc(100vh-2rem)] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between p-8 border-b border-gray-100">
                 <h3 className="text-3xl font-luxury-display text-gray-900">Filtros Avanzados</h3>
                 <motion.button
                   onClick={() => setIsFiltersOpen(false)}
@@ -624,30 +630,44 @@ export default function Vehiculos2() {
                     KILOMETRAJE: {formatMileage(filters.mileageRange[0])} - {formatMileage(filters.mileageRange[1])}
                   </label>
                   <div className="px-2">
-                    <input
-                      type="range"
-                      min="0"
-                      max="100000"
-                      step="5000"
-                      value={filters.mileageRange[0]}
-                      onChange={(e) => setFilters(prev => ({
-                        ...prev,
-                        mileageRange: [parseInt(e.target.value), prev.mileageRange[1]]
-                      }))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                    />
-                    <input
-                      type="range"
-                      min="0"
-                      max="100000"
-                      step="5000"
-                      value={filters.mileageRange[1]}
-                      onChange={(e) => setFilters(prev => ({
-                        ...prev,
-                        mileageRange: [prev.mileageRange[0], parseInt(e.target.value)]
-                      }))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider mt-2"
-                    />
+                    <div className="relative h-6">
+                      <input
+                        type="range"
+                        min="0"
+                        max="100000"
+                        step="5000"
+                        value={filters.mileageRange[0]}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value)
+                          if (value <= filters.mileageRange[1]) {
+                            setFilters(prev => ({
+                              ...prev,
+                              mileageRange: [value, prev.mileageRange[1]]
+                            }))
+                          }
+                        }}
+                        className="absolute w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                        style={{ zIndex: 10 }}
+                      />
+                      <input
+                        type="range"
+                        min="0"
+                        max="100000"
+                        step="5000"
+                        value={filters.mileageRange[1]}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value)
+                          if (value >= filters.mileageRange[0]) {
+                            setFilters(prev => ({
+                              ...prev,
+                              mileageRange: [prev.mileageRange[0], value]
+                            }))
+                          }
+                        }}
+                        className="absolute w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                        style={{ zIndex: 20 }}
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -657,28 +677,42 @@ export default function Vehiculos2() {
                     AÑO: {filters.yearRange[0]} - {filters.yearRange[1]}
                   </label>
                   <div className="px-2">
-                    <input
-                      type="range"
-                      min="2020"
-                      max="2024"
-                      value={filters.yearRange[0]}
-                      onChange={(e) => setFilters(prev => ({
-                        ...prev,
-                        yearRange: [parseInt(e.target.value), prev.yearRange[1]]
-                      }))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                    />
-                    <input
-                      type="range"
-                      min="2020"
-                      max="2024"
-                      value={filters.yearRange[1]}
-                      onChange={(e) => setFilters(prev => ({
-                        ...prev,
-                        yearRange: [prev.yearRange[0], parseInt(e.target.value)]
-                      }))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider mt-2"
-                    />
+                    <div className="relative h-6">
+                      <input
+                        type="range"
+                        min="2020"
+                        max="2024"
+                        value={filters.yearRange[0]}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value)
+                          if (value <= filters.yearRange[1]) {
+                            setFilters(prev => ({
+                              ...prev,
+                              yearRange: [value, prev.yearRange[1]]
+                            }))
+                          }
+                        }}
+                        className="absolute w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                        style={{ zIndex: 10 }}
+                      />
+                      <input
+                        type="range"
+                        min="2020"
+                        max="2024"
+                        value={filters.yearRange[1]}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value)
+                          if (value >= filters.yearRange[0]) {
+                            setFilters(prev => ({
+                              ...prev,
+                              yearRange: [prev.yearRange[0], value]
+                            }))
+                          }
+                        }}
+                        className="absolute w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                        style={{ zIndex: 20 }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -710,6 +744,7 @@ export default function Vehiculos2() {
                 >
                   APLICAR
                 </motion.button>
+              </div>
               </div>
             </motion.div>
           </>

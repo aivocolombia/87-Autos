@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Menu, X, ArrowLeft } from "lucide-react"
+import Footer from "../../components/footer"
+import Navbar from "../../components/navbar"
 
 const vehicleCategories = [
   {
@@ -422,26 +424,12 @@ export default function StockPage() {
   const [showInventory, setShowInventory] = useState(false)
   const [selectedVehicle, setSelectedVehicle] = useState(null)
   const [showVehicleDetails, setShowVehicleDetails] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const router = useRouter()
 
   const currentCategory = vehicleCategories.find((cat) => cat.id === selectedCategory)
   const currentImage = selectedModel ? modelImages[selectedModel as keyof typeof modelImages] : modelImages["SERIE 3"]
   const currentInventory = selectedModel ? vehicleInventory[selectedModel as keyof typeof vehicleInventory] || [] : []
 
-  const navItems = [
-    { name: "Inicio", href: "/", type: "navigate" },
-    { name: "Vehículos", href: "/stock", type: "navigate" },
-    { name: "Testimonios", href: "/#testimonials", type: "navigate" },
-    { name: "Contacto", href: "/#contact", type: "navigate" },
-  ]
-
-  const handleNavigation = (item: { href: string; type: string }) => {
-    if (item.type === "navigate") {
-      router.push(item.href)
-    }
-    setIsMenuOpen(false)
-  }
 
   const handleModelSelect = (model: string) => {
     setSelectedModel(model)
@@ -472,96 +460,47 @@ export default function StockPage() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
-        <div className="flex items-center justify-between p-6 md:p-8">
-          {/* Logo/Brand */}
-          <div className="flex items-center space-x-3">
-            <img
-              src="https://87autos.com/cdn/shop/files/logos-04_224ff7b9-c066-40d8-a14b-4ffa0f0a2efa.png?v=1727127568&width=200"
-              alt="87 Autos Logo"
-              className="h-8 w-auto"
-            />
-            <div className="text-gray-900 font-bold text-xl tracking-wider">87 AUTOS</div>
-          </div>
+      {/* Navigation */}
+      <Navbar />
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => handleNavigation(item)}
-                className={`relative hover:text-blue-600 transition-colors duration-300 font-medium tracking-wide pb-1 group ${
-                  item.name === "Vehículos" ? "text-blue-600" : "text-gray-900"
-                }`}
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 ease-out group-hover:w-full"></span>
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-900 hover:text-blue-600 transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation Menu */}
-        {isMenuOpen && (
-          <div className="absolute top-0 left-0 w-full h-screen bg-white/95 md:hidden">
-            <div className="flex flex-col items-center justify-center h-full space-y-8">
-              {navItems.map((item) => (
+      {/* Category Navigation - Sticky to page */}
+      <div className="sticky top-20 z-20 w-80 bg-gray-50 border-b border-gray-200">
+        <div className="px-12 py-4">
+          <div className="relative">
+            <div className="flex space-x-8">
+              {vehicleCategories.map((category, index) => (
                 <button
-                  key={item.name}
-                  onClick={() => handleNavigation(item)}
-                  className="text-gray-900 text-2xl font-bold tracking-wider hover:text-blue-600 transition-colors duration-300"
+                  key={category.id}
+                  onClick={() => handleCategoryChange(category.id)}
+                  className={`relative px-2 py-3 text-sm font-medium transition-colors duration-300 ${
+                    selectedCategory === category.id ? "text-blue-600" : "text-gray-600 hover:text-gray-900"
+                  }`}
                 >
-                  {item.name}
+                  {category.name}
                 </button>
               ))}
             </div>
-          </div>
-        )}
-      </nav>
 
-      <div className="flex pt-20 h-screen">
+            {/* Sliding underline indicator */}
+            <motion.div
+              className="absolute bottom-0 h-0.5 bg-blue-600"
+              initial={false}
+              animate={{
+                x: selectedCategory === "bmw" ? 0 : selectedCategory === "mini" ? 80 : 200,
+                width: selectedCategory === "bmw" ? 40 : selectedCategory === "mini" ? 100 : 60,
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex min-h-screen">
         {/* Left Sidebar */}
-        <div className="w-80 bg-gray-50 border-r border-gray-200 h-full flex flex-col">
-          {/* Category Tabs */}
-          <div className="px-6 py-4 border-b border-gray-200">
-            <div className="relative">
-              <div className="flex space-x-8">
-                {vehicleCategories.map((category, index) => (
-                  <button
-                    key={category.id}
-                    onClick={() => handleCategoryChange(category.id)}
-                    className={`relative px-2 py-3 text-sm font-medium transition-colors duration-300 ${
-                      selectedCategory === category.id ? "text-blue-600" : "text-gray-600 hover:text-gray-900"
-                    }`}
-                  >
-                    {category.name}
-                  </button>
-                ))}
-              </div>
-
-              {/* Sliding underline indicator */}
-              <motion.div
-                className="absolute bottom-0 h-0.5 bg-blue-600"
-                initial={false}
-                animate={{
-                  x: selectedCategory === "bmw" ? 0 : selectedCategory === "mini" ? 80 : 200,
-                  width: selectedCategory === "bmw" ? 40 : selectedCategory === "mini" ? 100 : 60,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              />
-            </div>
-          </div>
+        <div className="w-80 bg-gray-50 border-r border-gray-200 h-screen flex flex-col overflow-hidden">
 
           {/* Model List */}
-          <div className="px-6 py-4">
+          <div className="px-12 py-4 pt-8 flex-1 overflow-y-auto">
             <h3 className="text-lg font-bold mb-4 text-gray-900">{currentCategory?.name}</h3>
             <AnimatePresence mode="wait">
               <motion.div
@@ -603,9 +542,9 @@ export default function StockPage() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1">
+        <div className="flex-1 overflow-y-auto">
           {showVehicleDetails && selectedVehicle ? (
-            <div className="p-8 bg-white">
+            <div className="p-8 bg-white min-h-full">
               <div className="mb-6">
                 <button
                   onClick={handleBackToInventory}
@@ -746,7 +685,7 @@ export default function StockPage() {
               </div>
             </div>
           ) : !showInventory ? (
-            <div className="relative h-screen">
+            <div className="relative h-screen min-h-screen">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selectedModel || "default"}
@@ -767,7 +706,7 @@ export default function StockPage() {
               </AnimatePresence>
 
               {/* Content Overlay */}
-              <div className="absolute inset-0 flex items-end justify-between p-12">
+              <div className="absolute inset-0 flex items-center justify-between p-12">
                 <div className="max-w-lg">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -877,6 +816,9 @@ export default function StockPage() {
           )}
         </div>
       </div>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }

@@ -35,7 +35,7 @@ export default function Page() {
     },
     {
       id: 2,
-      image: "/placeholder-zqug9.png",
+      image: "/cooper.webp",
       alt: "Mini Cooper en entorno urbano",
       title: "Estilo Único",
       description:
@@ -79,7 +79,7 @@ export default function Page() {
               <div className="absolute inset-0 bg-grid-subtle opacity-30 pointer-events-none" />
 
               <div className="relative z-10">
-                <div className="container mx-auto px-6 mb-16">
+                <div className="container mx-auto px-24 mb-16">
                   <div className="text-center">
                     <h2 className="text-section-title mb-6 text-gray-900">CALIDAD PREMIUM</h2>
                     <p className="text-section-description text-gray-600 max-w-3xl mx-auto">

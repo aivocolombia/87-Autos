@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Navbar from "../../components/navbar"
+import Footer from "../../components/footer"
 
 export default function ExpertosPage() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -187,7 +188,7 @@ export default function ExpertosPage() {
         />
 
         {/* Hero Content */}
-        <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -272,7 +273,7 @@ export default function ExpertosPage() {
 
       {/* Team Section */}
       <section id="team" className="py-20 bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-12">
           <motion.h2
             className="text-5xl md:text-6xl font-luxury-display text-center mb-16 text-white"
             initial={{ opacity: 0, y: 50 }}
@@ -342,7 +343,7 @@ export default function ExpertosPage() {
 
       {/* Stats Section */}
       <section className="py-20 bg-gradient-to-r from-gray-900 to-black">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-12">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -393,7 +394,7 @@ export default function ExpertosPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-b from-black to-gray-900">
         <motion.div
-          className="max-w-4xl mx-auto text-center px-6"
+          className="max-w-4xl mx-auto text-center px-12"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -435,6 +436,9 @@ export default function ExpertosPage() {
           </div>
         </motion.div>
       </section>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }

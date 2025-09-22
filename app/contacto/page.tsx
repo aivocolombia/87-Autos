@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { MapPin, Phone, Mail, Send, Clock, CheckCircle, Car, Users, Award, Star } from "lucide-react"
 import Navbar from "../../components/navbar"
+import Footer from "../../components/footer"
 
 export default function ContactoPage() {
   const [formData, setFormData] = useState({
@@ -123,7 +124,7 @@ export default function ContactoPage() {
         <div className="absolute bottom-32 left-16 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-float" style={{ animationDelay: '2s' }} />
         <div className="absolute top-1/2 right-20 w-20 h-20 bg-blue-300 rounded-full opacity-25 animate-float" style={{ animationDelay: '4s' }} />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-12 lg:px-16 pt-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -166,7 +167,7 @@ export default function ContactoPage() {
 
       {/* Main Content */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-12 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             {/* Contact Form */}
             <motion.div
@@ -489,7 +490,7 @@ export default function ContactoPage() {
 
       {/* CTA Section */}
       <section className="py-16 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto text-center px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center px-12 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -539,6 +540,9 @@ export default function ContactoPage() {
           background-size: 20px 20px;
         }
       `}</style>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }
