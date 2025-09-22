@@ -226,8 +226,8 @@ export default function Vehiculos2() {
           {/* Luxury Pattern Overlay */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              backgroundSize: '60px 60px'
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M24 22.6667v-2.6667h-1.3333v2.6667h-2.6667v1.3333h2.6667v2.6667h1.3333v-2.6667h2.6667v-1.3333h-2.6667zm0-20V0h-1.3333v2.6667h-2.6667v1.3333h2.6667v2.6667h1.3333V6.6667h2.6667V4h-2.6667zM4 22.6667v-2.6667H2.6667v2.6667H0v1.3333h2.6667v2.6667h1.3333v-2.6667h2.6667v-1.3333H4zM4 4V0H2.6667v2.6667H0v1.3333h2.6667v2.6667h1.3333V6.6667h2.6667V4H4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundSize: '40px 20px'
             }}></div>
           </div>
         </div>
@@ -289,8 +289,6 @@ export default function Vehiculos2() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
             >
-              Descubre nuestra colección curada de vehículos premium BMW y Mini Cooper. 
-              Cada unidad ha sido seleccionada por su excelencia y condición excepcional.
             </motion.p>
           </motion.div>
         </div>
